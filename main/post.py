@@ -1,4 +1,6 @@
 from test.utils import get_random_string
+
+
 class Post:
 
     def __init__(self, title=None, content=None, slug= None, author=None):
@@ -21,7 +23,7 @@ class Post:
         post = Post(title, content, slug)
         post.create_with_endpoint()
 
-    def get_post(self, slug):\
+    def get_post(self, slug):
         pass
 
     def create_with_endpoint(self):

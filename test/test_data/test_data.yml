@@ -1,0 +1,16 @@
+test_case:
+  positive_test:
+    enabled: true
+    test_id: 1
+    test_category: positive
+    post:
+      title: positive_test_title
+      content: positive_test_content
+
+  negative_test:
+    enabled: true
+    test_id: 2
+    test_category: negative
+    post:
+      title: negative_test_title
+      content: negative_test_content
