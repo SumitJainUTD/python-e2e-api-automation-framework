@@ -1,22 +1,27 @@
-[
-  {
-    "enabled": true,
-    "test_id": 1,
-    "test_case": "positive_test",
-    "test_category": "positive",
-    "post": {
-      "title": "positive_test_title",
-      "content": "positive_test_content"
+{
+  "posts": [
+    {
+      "name": "positive_post",
+      "title": "positive_title",
+      "content": "positive_content"
     }
-  },
-  {
-    "enabled": true,
-    "test_id": 2,
-    "test_case": "negative_test",
-    "test_category": "negative",
-    "post": {
-      "title": "negative_test_title",
-      "content": "negative_test_content"
+  ],
+  "users": [
+    {
+      "name": "first_admin_user",
+      "username": "test",
+      "password": "test"
     }
-  }
-]
+  ],
+  "test_cases": [
+    {
+      "enabled": true,
+      "test_id": 1,
+      "test_case": "positive_test",
+      "test_category": "positive",
+      "post": "positive_post",
+      "user": "first_admin_user"
+    }
+  ]
+}
+

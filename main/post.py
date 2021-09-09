@@ -14,9 +14,9 @@ class Post:
 
     def create_post(self, title=None, content=None, slug= None):
         rnd = get_random_string()
-        if title is None:
+        if title is not None:
             title = "title_" + rnd
-        if content is None:
+        if content is not None:
             content = "content_" + rnd
         if slug is None:
             slug = rnd

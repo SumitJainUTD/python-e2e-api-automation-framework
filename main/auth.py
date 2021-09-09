@@ -1,4 +1,4 @@
-import requests
+
 
 from main.exceptions import DataError
 from api_client import ApiClient
@@ -33,38 +33,22 @@ class Auth:
         if response.status_code == 200:
             access_token = response.json()['access']
             refresh = response.json()['refresh']
+            return response.json()
         elif response.status_code == 401:
             raise DataError("Invalid username or password")
-
-        def login(self, username, password):
-            if (username is None) or (password is None):
-                raise DataError("Require Username and password for login")
-
-            url = self.config.auth_uri
-            body = {
-                'username': username,
-                'password': password
-            }
-            response = self.api_client.call_api(method="POST", url=url, body=body)
-            if response.status_code == 200:
-                access_token = response.json()['access']
-                refresh = response.json()['refresh']
-            elif response.status_code == 401:
-                raise DataError("Invalid username or password")
 
     def login(self, refresh_token):
         if refresh_token is None:
             raise DataError("refresh_token is None")
 
-        url = self.config.auth_uri
+        url = self.config.base_uri + self.config.auth_uri + "refresh"
         body = {
-            'username': username,
-            'password': password
+            'refresh': refresh_token
         }
         response = self.api_client.call_api(method="POST", url=url, body=body)
         if response.status_code == 200:
             access_token = response.json()['access']
             refresh = response.json()['refresh']
+            return response.json()
         elif response.status_code == 401:
-            raise DataError("Invalid username or password")
-
+            raise DataError("Invalid refresh token")
