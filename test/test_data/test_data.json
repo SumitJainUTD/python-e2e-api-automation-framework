@@ -6,13 +6,6 @@
       "content": "positive_content"
     }
   ],
-  "users": [
-    {
-      "name": "first_admin_user",
-      "username": "test",
-      "password": "test"
-    }
-  ],
   "test_cases": [
     {
       "enabled": true,
