@@ -1,17 +1,15 @@
-
-
 from main.exceptions import DataError
-from api_client import ApiClient
-from utils.configuration import Configuration
+from .api_client import ApiClient
+from .utils.configuration import Configuration
 
 
 class Auth:
-    config = Configuration("qa")
 
-    def __init__(self, api_client=None):
+    def __init__(self, api_client=None, env='qa'):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
+        self.config = Configuration(env)
 
     def __init__(self, username=None, password=None):
         self.username = username
@@ -48,7 +46,19 @@ class Auth:
         response = self.api_client.call_api(method="POST", url=url, body=body)
         if response.status_code == 200:
             access_token = response.json()['access']
-            refresh = response.json()['refresh']
-            return response.json()
+            data = response.json()
+            data['refresh'] = refresh_token
+            return data
         elif response.status_code == 401:
             raise DataError("Invalid refresh token")
+
+    def verify_token(self, token):
+        url = self.config.base_uri + self.config.auth_uri + "verify"
+        body = {
+            'token': token
+        }
+        response = self.api_client.call_api(method="POST", url=url, body=body)
+        if response.status_code == 200:
+            return True
+        else:
+            return False

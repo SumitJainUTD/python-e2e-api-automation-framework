@@ -1,9 +1,10 @@
 {
   "posts": [
     {
-      "name": "positive_post",
-      "title": "positive_title",
-      "content": "positive_content"
+      "positive_post": {
+        "title": "positive_title",
+        "content": "positive_content"
+      }
     }
   ],
   "test_cases": [
