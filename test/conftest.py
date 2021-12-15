@@ -5,10 +5,11 @@ from main.auth import Auth
 
 env = None
 logged_in_user = {}
+test_posts = []
 
 
 def pytest_addoption(parser):
-    parser.addoption("--env")
+    parser.addoption("--env", default='qa')
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -16,7 +17,7 @@ def before_suite(request):
     print('Beginning of the suite')
     global env
     env = request.config.getoption("--env")
-    properties = Configuration(env)
+    # properties = Configuration(env)
 
     def after_suite():
         print('End of the suite')
@@ -26,6 +27,14 @@ def before_suite(request):
 
 def get_env():
     return env
+
+
+def set_test_posts(all_test_posts):
+    test_posts = all_test_posts
+
+
+def get_test_posts():
+    return test_posts
 
 
 def get_token_for_user(user, refresh=False):

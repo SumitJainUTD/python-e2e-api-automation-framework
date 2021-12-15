@@ -3,15 +3,30 @@ import json
 import os
 
 
-def get_data_json(cname):
-    file_path = "../../test/test_data/test_data.json"
+def get_data_json(test_category=None, test_sub_category=None):
+    import sys
+    print(sys._getframe().f_code.co_name)
+    file_path = "../test/test_data/test_data.json"
+    # file_path = "test/test_data/test_data.json"
     fh = open(file_path)
-    data = json.load(fh)
-    return_data = []
-    for d in data:
-        if d.get('enabled') and d.get('test_category') == cname:
-            return_data.append(d)
+    _data = json.load(fh)
     fh.close()
+    posts = _data.get('posts')
+    test = _data.get('test_cases')
+    return_data = {}
+    test_data = []
+    for t in test:
+        if t.get('enabled'):
+            if test_category is not None and t.get('test_category') == test_category:
+                if test_sub_category is not None and t.get('test_sub_category') == test_sub_category:
+                    test_data.append(t)
+                elif test_sub_category is None:
+                    test_data.append(t)
+            elif test_category is None:
+                test_data.append(t)
+
+    return_data['posts'] = posts
+    return_data['test_data'] = test_data
     return return_data
 
 
@@ -34,8 +49,8 @@ def get_range(rows):
             return index
     return len(rows)
 
-
-data = get_data_json("negative")
-print(data)
-
+#
+# data = get_data_json("positive")
+# print(data)
+#
 print(os.path.relpath("/Users/sumitjain/Work/python/api-automation-framwork/test/test_data/test_data.json"))
